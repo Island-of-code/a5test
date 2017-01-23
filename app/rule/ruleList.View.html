@@ -1,0 +1,77 @@
+
+<div cg-busy="loadingPromise">
+    <nav class="navbar navbar-default">
+
+        <div class="navbar-header">
+            <form class="navbar-form navbar-left">
+                <button ng-click="createRule()" class="btn btn-default">ADD RULE</button>
+            </form>
+
+        </div>
+    </nav>
+    <div>
+
+        <table class="table table-striped" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th >Action</th>
+                    <th >User/Group</th>
+                    <th >Source IP</th>
+                    <th >Destination IP</th>
+                    <th >Destination Port</th>
+                    <th ></th>
+                </tr>
+            </thead>
+
+            <tbody  dnd-list="Rules">
+                <tr
+                    dnd-draggable="rule" dnd-moved="Rules.splice($index, 1); updateOrderIndex();"
+                    dnd-effect-allowed="move"
+                    ng-dblclick="ruleDBClick(rule)"  ng-repeat="rule in Rules">
+                    <td  style="height: 100%; height: 1px;">
+                        <div style="height: 100%" class="layout-column flex-33 layout-align-center-center">
+                            <div>
+                            {{rule.orderIndex + 1}}
+                            </div>
+                        </div>
+
+                    </td>
+                    <td class="name" >
+                        {{rule.name}}</td>
+                    <td >{{rule.action}}</td>
+                    <td  class="name">
+                        <div ng-repeat="userName in rule.userNameList">
+                            {{userName}}
+                        </div>
+                    </td>
+                    <td >
+                        <div ng-repeat="sourceIp in rule.sourceIpList">
+                            {{sourceIp}}
+                        </div>
+                    </td>
+                    <td >
+                        <div ng-repeat="destIp in rule.destIpList">
+                            {{destIp}}
+                        </div>
+                    </td>
+                    <td >
+                        <div ng-repeat="destPort in rule.destPortList">
+                            {{destPort}}
+                        </div>
+                    </td>
+                    <td  style="height: 100%; height: 1px"  >
+                        <div style="height: 100%" class="layout-column  layout-align-center-center">
+
+                            <a href="#"><span class="glyphicon glyphicon-trash flex" ng-click="removeRule($index)"></span></a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pre>Rules = {{Rules| json}}</pre>
+    </div>
+</div>
+

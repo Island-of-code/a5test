@@ -1,0 +1,255 @@
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Rule</h3>
+</div>
+
+
+<div class="modal-body" id="modal-body">
+    <div>
+        <uib-tabset active="active"> 
+            <uib-tab heading="General">
+
+                <form name="generalForm">
+                    <div  ng-init="forms.generalForm = generalForm;" class="layout-column layout-padding">
+
+                        <div class="form-group" ng-class="{ 'has-error': (generalForm.ruleName.$touched || generalForm.ruleName.$dirty) && generalForm.ruleName.$invalid }">
+                            <label>Name</label>
+                            <input type="text" name="ruleName" required maxlength="70"  ng-minlength="1" ng-maxlength="70" ng-model="Rule.name" style="min-width: 180px" class="flex-80 form-control">
+                            <div multiple  ng-messages="generalForm.ruleName.$error" ng-if="(generalForm.ruleName.$touched || generalForm.ruleName.$dirty)">
+                                <span ng-message="minlength" class="text-danger">Value is too short.<br></span>
+                                <span ng-message="maxlength" class="text-danger">Value is too long.<br></span>
+                                <span ng-message="required" class="text-danger">Value is required.<br></span>
+                            </div>        
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="singleSelect">Action</label>
+                            <select name="singleSelect" style="max-width: 100px" ng-model="Rule.action" class="form-control">
+                                <option value="deny">deny</option>
+                                <option value="allow">allow</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </form>
+            </uib-tab>
+
+            <uib-tab heading="User/Group">
+
+                <div class="layout-row layout-padding flex" >
+
+                    <div class="layout-column  flex">
+
+
+                        <div class="panel panel-default"  style="max-height: 200px;min-height: 100px; overflow:auto">
+                            <div class="panel-body">
+                                <div  ng-class-even="'odd'" class="layout-row layout-align-center-center"  ng-repeat="userName in Rule.userNameList track by $index">
+                                    <div class="break-word flex layout-align-center ">
+                                        {{userName}}
+                                    </div>
+
+                                    <a href="#"><span class="glyphicon glyphicon-trash" ng-click="deleteUser(userName)"></span></a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layout-column flex">
+                        <form novalidate name="userNameForm"  >
+
+                            <div  ng-init="forms.userNameForm = userNameForm;" class="form-group" ng-class="{ 'has-error': (userNameForm.userName.$touched || userNameForm.userName.$dirty) && userNameForm.userName.$invalid }">
+                                <label>Name</label>
+                                <input name="userName"   
+
+                                       ng-model="userNameModel.value" class="form-control" required maxlength="50" ng-minlength="1" ng-maxlength="50">
+
+                                <div  multiple  ng-messages="userNameForm.userName.$error" ng-if="(userNameForm.userName.$touched || userNameForm.userName.$dirty)">
+                                    <span ng-message="minlength" class="text-danger">Value is too short.<br></span>
+                                    <span ng-message="maxlength" class="text-danger">Value is too long.<br></span>
+                                    <span ng-message="required" class="text-danger">Value is required.<br></span>
+
+                                </div>
+
+                                <span ng-show="userNameModel.isMaxCountError" class="text-danger">Count in list more than 10.<br></span>
+                                <span ng-show="userNameModel.isDuplicateError" class="text-danger">Name already exist.<br></span>
+
+                            </div>
+
+                        </form>
+
+                        <button class="btn btn-default" ng-click="addUserName(userNameForm)">ADD</button>
+                    </div>
+
+                </div>
+
+
+            </uib-tab>
+
+            <uib-tab heading="Source IP">
+                <div class="layout-row layout-padding flex" >
+
+                    <div class="layout-column  flex">
+
+
+                        <div class="panel panel-default"  style="max-height: 200px;min-height: 100px; overflow:auto">
+                            <div class="panel-body">
+                                <div  ng-class-even="'odd'" class="layout-row layout-align-center-center"  ng-repeat="sourceIp in Rule.sourceIpList track by $index">
+                                    <div class="flex layout-align-center" flex>
+                                        {{sourceIp}}
+                                    </div>
+
+
+                                    <a href="#"><span class="glyphicon glyphicon-trash" ng-click="deleteSourceIp(sourceIp)"></span></a>
+
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layout-column flex">
+                        <form novalidate name="sourceIpForm"  >
+
+                            <div  ng-init="forms.sourceIpForm = sourceIpForm;" class="form-group" ng-class="{ 'has-error': (sourceIpForm.sourceIp.$touched || sourceIpForm.sourceIp.$dirty) && sourceIpForm.sourceIp.$invalid }">
+                                <label>Name</label>
+                                <input name="sourceIp"   
+                                       ui-validate="{isValidIp : 'isValidIp($value)' }"
+                                       placeholder='xxx.xxx.xxx.xxx'
+                                       ng-model="sourceIpModel.value" class="form-control" required ng-minlength="1" ng-maxlength="50">
+
+                                <div  multiple  ng-messages="sourceIpForm.userName.$error" ng-if="(sourceIpForm.sourceIp.$touched || sourceIpForm.sourceIp.$dirty)">
+                                    <span ng-message="minlength" class="text-danger">Value is too short.<br></span>
+                                    <span ng-message="maxlength" class="text-danger">Value is too long.<br></span>
+                                    <span ng-message="required" class="text-danger">Value is required.<br></span>
+
+                                </div>
+
+                                <span ng-show="sourceIpModel.isMaxCountError" class="text-danger">Count in list more than 10.<br></span>
+                                <span ng-show="sourceIpModel.isDuplicateError" class="text-danger">Value already exist.<br></span>
+
+                            </div>
+
+                        </form>
+
+                        <button class="btn btn-default" ng-click="addSourceIp()">ADD</button>
+                    </div>
+
+                </div>
+            </uib-tab>
+
+            <uib-tab heading="Destination IP">
+                <div class="layout-row layout-padding flex" >
+
+                    <div class="layout-column  flex">
+
+
+                        <div class="panel panel-default"  style="max-height: 200px;min-height: 100px; overflow:auto">
+                            <div class="panel-body">
+                                <div  ng-class-even="'odd'" class="layout-row layout-align-center-center"  ng-repeat="destIp in Rule.destIpList track by $index">
+                                    <div class="flex layout-align-center" flex>
+                                        {{destIp}}
+                                    </div>
+
+
+                                    <a href="#"><span class="glyphicon glyphicon-trash" ng-click="deleteDestIp(destIp)"></span></a>
+
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layout-column flex">
+                        <form novalidate name="destIpForm"  >
+
+                            <div  ng-init="forms.destIpForm = destIpForm;" class="form-group" ng-class="{ 'has-error': (destIpForm.destIp.$touched || destIpForm.destIp.$dirty) && destIpForm.destIp.$invalid }">
+                                <label>Name</label>
+                                <input name="destIp"   
+                                       ui-validate="{isValidIp : 'isValidIp($value)' }"
+                                       placeholder='xxx.xxx.xxx.xxx'
+                                       ng-model="destIpModel.value" class="form-control" required ng-minlength="1" ng-maxlength="50">
+
+                                <div  multiple  ng-messages="sourceIpForm.destIp.$error" ng-if="(destIpForm.destIp.$touched || destIpForm.destIp.$dirty)">
+                                    <span ng-message="minlength" class="text-danger">Value is too short.<br></span>
+                                    <span ng-message="maxlength" class="text-danger">Value is too long.<br></span>
+                                    <span ng-message="required" class="text-danger">Value is required.<br></span>
+
+                                </div>
+
+                                <span ng-show="destIpModel.isMaxCountError" class="text-danger">Count in list more than 10.<br></span>
+                                <span ng-show="destIpModel.isDuplicateError" class="text-danger">Value already exist.<br></span>
+
+                            </div>
+
+                        </form>
+
+                        <button class="btn btn-default" ng-click="addDestIp()">ADD</button>
+                    </div>
+
+                </div>
+            </uib-tab>
+            <uib-tab heading="Destination Port">
+                <div class="layout-row layout-padding flex" >
+
+                    <div class="layout-column  flex">
+
+                        <div class="panel panel-default"  style="max-height: 200px;min-height: 100px; overflow:auto">
+                            <div class="panel-body">
+                                <div  ng-class-even="'odd'" class="layout-row layout-align-center-center"  ng-repeat="destPort in Rule.destPortList track by $index">
+                                    <div class="flex layout-align-center" flex>
+                                        {{destPort}}
+                                    </div>
+
+                                    <a href="#"><span class="glyphicon glyphicon-trash" ng-click="deleteDestPort(destPort)"></span></a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layout-column flex">
+                        <form novalidate name="destPortForm"  >
+
+                            <div  ng-init="forms.destPortForm = destPortForm;" class="form-group" ng-class="{ 'has-error': (destPortForm.destPort.$touched || destPortForm.destPort.$dirty) && destPortForm.destPort.$invalid }">
+                                <label>Name</label>
+                                <input name="destPort"  type="number" required style="max-width:100px"
+
+                                       ng-model="destPortModel.value" class="form-control" required ng-min="1" ng-max="65535">
+
+                                <div  multiple  ng-messages="destPortForm.destPort.$error" ng-if="(destPortForm.destPort.$touched || destPortForm.destPort.$dirty)">
+                                    <span ng-message="min" class="text-danger">Value is too short.<br></span>
+                                    <span ng-message="max" class="text-danger">Value is too long.<br></span>
+                                    <span ng-message="required" class="text-danger">Value is required.<br></span>
+
+                                </div>
+
+                                <span ng-show="destPortModel.isMaxCountError" class="text-danger">Count in list more than 10.<br></span>
+                                <span ng-show="destPortModel.isDuplicateError" class="text-danger">Value already exist.<br></span>
+
+                            </div>
+
+                        </form>
+
+                        <button class="btn btn-default" ng-click="addDestPort()">ADD</button>
+                    </div>
+
+                </div>
+            </uib-tab>
+
+        </uib-tabset>
+    </div>
+</div>
+
+<div class="modal-footer">
+
+    <button class="btn btn-default" type="button" ng-click="cancel()">CLOSE</button>
+    <button class="btn btn-primary" ng-disabled="forms.generalForm.ruleName.$invalid" type="button" ng-click="OK()">SAVE</button>
+
+</div>
+

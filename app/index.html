@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>My AngularJS App</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link rel="stylesheet" href="bower_components/normalize.css">
+        <link rel="stylesheet" href="bower_components/main.css">-->
+        <link rel="stylesheet" href="components/busy/angular-busy.css">
+
+        <link rel="stylesheet" href="components/bootstrap-3.3.7/css/bootstrap.css">
+
+
+        <link rel="stylesheet" href="css/layout-align.css">
+        <link rel="stylesheet" href="css/app.css">
+        <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+    </head>
+    <body ng-app="myApp" ng-controller="MainCtrl">
+
+        <div class="wrap">
+
+            <div ui-view="viewName">
+
+            </div>
+        </div>
+
+
+        <div id="bar-bottom">
+            <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+            -->
+
+
+            <script src="angular/angular.js"></script>
+            <script src="angular/angular-route.js"></script>
+            <script src="angular/angular-animate.js"></script>
+            <script src="angular/angular-messages.js"></script>
+            <script src="angular/angular-aria.js"></script>
+
+
+            <script src="angular/validate.js"></script>
+
+            <script src="components/jquery-1.12.0.js"></script>
+            <script src="components/version/version.js"></script>
+            <script src="components/version/version-directive.js"></script>
+            <script src="components/version/interpolate-filter.js"></script>
+            <script src="components/busy/angular-busy.js"></script>
+            <script src="components/angular-ui-router.js"></script>
+            <script src="components/angular-drag-and-drop-lists.js"></script>
+            <script src="components/bootstrap-3.3.7/js/bootstrap.js"></script>
+            <script src="components/ui-bootstrap-tpls-2.3.1.js"></script>
+            <script src="components/layout-align.js"></script>
+        
+
+            <script src="rule/rule.js"></script>
+            <script src="app.js"></script>
+
+            <script src="main.ctrl.js"></script>
+            
+            <script src="rule/editRule.modal.ctrl.js"></script>
+            <script src="services/ruleRemoteStore.js"></script>
+            <script src="rule/ruleOrderIndex.Ctrl.js"></script>
+            <script src="rule/ruleList.Ctrl.js"></script>
+            <script src="home/home.controller.js"></script>
+
+        </div>
+    </body>
+</html>

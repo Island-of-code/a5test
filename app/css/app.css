@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100%;
+  
+    margin: 0;
+    padding: 0;
+}
+
+
+.wrap
+{
+    padding: 100px;
+}
+
+.username-list-item
+{
+    margin-left:10px;
+}
+
+td.name
+{
+    max-width: 300px;
+    word-wrap: break-word;
+} 
+
+.break-word
+{
+    word-wrap: break-word;
+} 
+
+.odd {
+  background-color: #F7F7F7;
+}
+
+@media screen and (max-width: 900px) {
+
+    wrap {
+        padding: 100px;
+    }
+
+
+}
+@media screen and (max-width: 484px) {
+
+    .wrap {
+        height: calc(100% - 175px);
+    }
+
+}
